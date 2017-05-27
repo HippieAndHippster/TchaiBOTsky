@@ -1,0 +1,26 @@
+.teclado{
+  display: block;
+  position: fixed;
+  min-width: 100%;
+  width: 100%;
+  max-width: 100%;
+  bottom: 0px;
+  background-color:#0097a7;
+}
+.tecla{
+  background-color: white;
+  display: inline-block;
+  width: 12%;
+  height: 200px;
+  border-radius: 10px;
+  border-width: 5px;
+  border-color: black;
+}
+.tecla:hover{
+  background-color: #ef9a9a;
+}
+.accidente{
+  display:inline-block;
+  background-color: #424242;
+  z-index: 10px;
+}
