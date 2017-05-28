@@ -17,8 +17,8 @@ $(function() {
     var Notas = [];
     var duracion = "q";
     var Ttranscurrido = [];
-    tiempo = "q";
-    OctPos = 3;
+    var tiempo = 100;
+    var OctPos = 3;
 
     $DN.click(function(){
       Notas.pop();
@@ -76,67 +76,87 @@ $(function() {
 
   });
 
-
+function VexFormatter(){
+    
+}
   $(document).on('click','.te', function(event) {
     Nota = $(this).text();
-    OctPos += 1;
-    var Notita = Nota+"/"+ OctPos;
+    var Notita = Nota+"/"+ (OctPos + 1);
     Notas.push(Notita);
-    OctPos -= 1;
-    var Tactual = $(this).data('Completar');
-    Ttranscurrido.push(Tactual);
-    VexFormatter(Notita);
-    console.log(Notas);
+    //var Tactual = $(this).data('Completar');
+    Ttranscurrido.push(duracion);
+    //console.log(duracion);
 
-    tiempo = 400;
     var i;
     var tiempo = 0;
     var notes = [];
     var stave = new VF.Stave(0, 0, 250);
-    var in = 1;
+    var inside = 1;
     for(i = 0; i < Ttranscurrido.length; i++){
-      tiempo = Ttranscurrido[i];
-      if(tiempo >= 400 && in < 5){
-        tiempo = 0;
-
-
-        stave = new VF.Stave(in * 200, 0, 200);
-        in++;
-        notes = [];
+        switch(Ttranscurrido[i]){
+                  case '16':
+                    tiempo += 25;
+                  break;
+                  case '8':
+                    tiempo += 50;
+                  break;
+                  case 'q':
+                    tiempo += 100;
+                  break;
+                  case 'h':
+                    tiempo += 200;
+                  break;
+                  case 'w':
+                    tiempo += 400;
+                  break;
+          }
+      if(tiempo >= 400 && inside < 5){
+          tiempo = 0;
+          VF.Formatter.FormatAndDraw(context, stave, notes);
+          stave = new VF.Stave(inside * 200, 0, 200);
+          if(inside == 1)
+            stave.setContext(context).draw();
+          inside++;
+          notes = [];
       }
       else{
-        notes.push(
-          new VF.StaveNote({ keys: Notas[i], duration: duration})
-        );
+          notes.push(
+              new VF.StaveNote({ keys: [Notas[i]], duration: Ttranscurrido[i]})
+          );
       }
     }
     while(tiempo > 0){
       //FILL THE GAP
       if(tiempo + 200 <= 400){
-        tiempo += 200;
+        tiempo -= 200;
         notes.push(
-          new VF.StaveNote({ keys: Notas[i], duration: 'hr'})
+          new VF.StaveNote({ keys: [Notas[0]], duration: 'hr'})
         );
       }
       else if(tiempo + 100 <= 400){
-        tiempo += 100;
+        tiempo -= 100;
         notes.push(
-          new VF.StaveNote({ keys: Notas[i], duration: 'qr'})
+          new VF.StaveNote({ keys: [Notas[0]], duration: 'qr'})
         );
       }
-      if(tiempo + 50 <= 400){
-        tiempo += 50;
-        notes.push(
-          new VF.StaveNote({ keys: Notas[i], duration: '8r'})
-        );
+      else if(tiempo + 50 <= 400){
+        tiempo -= 50;
+        notes.push(new VF.StaveNote({ keys: [Notas[0]], duration: '8r'}));
       }
-      if(tiempo + 25 <= 400){
-        tiempo += 25;
-        notes.push(
-          new VF.StaveNote({ keys: Notas[i], duration: '16'})
-        );
+      else if(tiempo + 25 <= 400){
+        tiempo -= 25;
+        notes.push(new VF.StaveNote({ keys: [Notas[0]], duration: '16r'}));
       }
     }
+      var voice = new VF.Voice({num_beats: 4,  beat_value: 4});
+      voice.addTickables(notes);
+
+      // Format and justify the notes to 400 pixels.
+      var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 200);
+
+      // Render voice
+      voice.draw(context, stave);
+    
   });
 
   $(document).on('click','.opTiem', function(event) {
@@ -145,34 +165,32 @@ $(function() {
   });
 
 });
-/* Preubas */
-function VexFormatter(Nota){
-
-  var nuevasN = [
-      new VF.StaveNote({ keys: Nota , duration: tiempo})
-  ];
-  var voice = new VF.Voice({num_beats: 4,  beat_value: 4});
-  voice.addTickables(nuevasN);
-  var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
-
-}
 
 
-// Create the notes
-var notes = [
-  // A quarter-note C.
-  new VF.StaveNote({ keys: ["c/4"], duration: "q" }),
-  // A quarter-note D.
-  new VF.StaveNote({ keys: ["d/4"], duration: "q" }),
+//VEXFLOW
+VF = Vex.Flow;
 
-  // A quarter-note rest. Note that the key (b/4) specifies the vertical
-  // position of the rest.
-  new VF.StaveNote({ keys: ["b/4"], duration: "qr" }),
+// Create an SVG renderer and attach it to the DIV element named "boo".
+var div = document.getElementById("Upen")
+var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
-  // A C-Major chord.
-  new VF.StaveNote({ keys: ["c/4", "e/4", "g/4"], duration: "q" })
-];
+// Configure the rendering context.
+renderer.resize(500, 500);
+var context = renderer.getContext();
+context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
+
+// Create a stave of width 400 at position 10, 40 on the canvas.
+var stave = new VF.Stave(0, 0, 200);
+
+// Add a clef and time signature.
+stave.addClef("treble").addTimeSignature("4/4");
+
+// Connect it to the rendering context and draw!
 stave.setContext(context).draw();
+
+
+/*
+// Create the notes
 var notes = [
   // A quarter-note C.
   new VF.StaveNote({ keys: ["c/4"], duration: "q" }),
@@ -188,22 +206,8 @@ var notes = [
 ];
 VF.Formatter.FormatAndDraw(context, stave, notes);
 
-
-
-
-
-
-
-
-
-
-var stave = new VF.Stave(250, 0, 200);
-
-
-// Connect it to the rendering context and draw!
-//stave.setContext(context).draw();
-
-// Create the notes
+var stave = new VF.Stave(200, 0, 200);
+    
 var notes = [
   // A quarter-note C.
   new VF.StaveNote({ keys: ["c/4"], duration: "q" }),
@@ -217,28 +221,6 @@ var notes = [
   // A C-Major chord.
   new VF.StaveNote({ keys: ["c/4", "e/4", "g/4"], duration: "q" })
 ];
-stave.setEndBarType(VF.Barline.type.END);
-//stave.setContext(context).draw();
-var notes = [
-  // A quarter-note C.
-  new VF.StaveNote({ keys: ["c/4"], duration: "q" }),
-  // A quarter-note D.
-  new VF.StaveNote({ keys: ["d/4"], duration: "q" }),
-
-  // A quarter-note rest. Note that the key (b/4) specifies the vertical
-  // position of the rest.
-  new VF.StaveNote({ keys: ["b/4"], duration: "qr" }),
-
-  // A C-Major chord.
-  new VF.StaveNote({ keys: ["c/4", "e/4", "g/4"], duration: "q" })
-];
-//VF.Formatter.FormatAndDraw(context, stave, notes);
-
-
-
-
-
-
 
 stave.setContext(context).draw();
 // Create a voice in 4/4 and add above notes
@@ -250,3 +232,4 @@ var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 200);
 
 // Render voice
 voice.draw(context, stave);
+*/
