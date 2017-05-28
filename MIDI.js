@@ -3,8 +3,8 @@ fs = require('fs');
 
 var track1 = new MidiWriter.Track();
 track1.addEvent([
-            new MidiWriter.NoteEvent({pitch: ['B4','D4','F4'], duration: '4'}),
-            new MidiWriter.NoteEvent({pitch: ['E4','G4','B4'], duration: '4', channel: 2}),
+            new MidiWriter.NoteEvent({pitch: ['B#4','D#4','F#4'], duration: '4'}),
+            new MidiWriter.NoteEvent({pitch: ['B4','D4','F4'], duration: '4', channel: 2}),
             new MidiWriter.NoteEvent({pitch: ['C4'], duration: '2'}),
             new MidiWriter.NoteEvent({pitch: ['E4','D4'], duration: '4'}),
             new MidiWriter.NoteEvent({pitch: ['C4'], duration: '2'}),
@@ -17,8 +17,8 @@ track1.addEvent([
 );
 var track2 = new MidiWriter.Track();
 track2.addEvent([
-            new MidiWriter.NoteEvent({pitch: ['E4','G4','B4'], duration: '4', channel: 2}),
-            new MidiWriter.NoteEvent({pitch: ['E4','D4'], duration: '4', channel: 2})
+            //new MidiWriter.NoteEvent({pitch: ['E4','G4','B4'], duration: '4', channel: 2}),
+            //new MidiWriter.NoteEvent({pitch: ['E4','D4'], duration: '4', channel: 2})
     ], function(event, index) {
     //return {sequential:true};
     return {sequential:false};

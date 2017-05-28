@@ -16,17 +16,40 @@ button img{
   height: 200px;
   right: 0px;
   bottom: 0px;
-  background-color: rgb(134, 162, 137);
+  background-color: #0097a7;
 }
 .chat span{
   text-align: center;
   font-size: 300%;
-  width: 10vw;
+  width: 7vw;
   display: inline-block;
-  color: white;
+  color: #455a64;
   height: 33%``;
 }
 
+.contenedor{
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    top: 0;
+    width: 350px;
+    z-index: 5;
+}
+.tostada{
+  width: 30%;
+  position:relative;
+  z-index:99999999999;
+  top: 15%;
+  font-size: large;
+  font-weight: bold;
+  padding: 2% 6% 2% 6%;
+  bottom: 100vh;
+  right:-300px;
+  cursor: pointer;
+}
+.tostada:hover{
+  background-color: rgb(138, 129, 148);
+}
 /*---*/
 .teclado{
   display: block;

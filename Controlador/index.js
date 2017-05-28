@@ -9,8 +9,8 @@ $(function() {
     var mood;
     var speed;
     var bpm = 120;
-    
-    
+
+
     var texto = $("#txt");
     var btn = $("#enviar");
     var OctUp = $("#UP");
@@ -24,6 +24,7 @@ $(function() {
     var Ttranscurrido = [];
     var tiempo = 100;
     var OctPos = 3;
+
 
     $DN.click(function(){
       Notas.pop();
@@ -178,26 +179,46 @@ $(function() {
 
     // Render voice
     voice.draw(context, stave);
-
+      sendBOT();
   });
 
   $(document).on('click','.opTiem', function(event) {
     duracion = $(this).attr('id');
     console.log(duracion);
   });
-    
+
     function sendBOT(){
         melody = [];
-        
+
         for(var i = 0; i < Notas.length; i++){
-            var note
+            var note = Notas[i].split('/');
+            note = note[0];
+            var duration;
+            switch(Ttranscurrido[i]){
+                  case '16':
+                    duration = 1;
+                  break;
+                  case '8':
+                    duration = 2;
+                  break;
+                  case 'q':
+                    duration = 4;
+                  break;
+                  case 'h':
+                    duration = 8;
+                  break;
+                  case 'w':
+                    duration = 16;
+                  break;
+          }
+            melody.push([note,duration]);
         }
+        console.log(melody);
         var parameters = {
             tempo : bpm,
             velocidad: speed,
             sentimiento: mood,
             melodia : melody
-            
         }
         $.ajax({
           method: "POST",
