@@ -17,8 +17,8 @@ track1.addEvent([
 );
 var track2 = new MidiWriter.Track();
 track2.addEvent([
-            //new MidiWriter.NoteEvent({pitch: ['E4','G4','B4'], duration: '4', channel: 2}),
-            //new MidiWriter.NoteEvent({pitch: ['E4','D4'], duration: '4', channel: 2})
+            new MidiWriter.NoteEvent({pitch: ['E4','G4','B4'], duration: '4', channel: 2}),
+            new MidiWriter.NoteEvent({pitch: ['E4','D4'], duration: '4', channel: 2})
     ], function(event, index) {
     //return {sequential:true};
     return {sequential:false};

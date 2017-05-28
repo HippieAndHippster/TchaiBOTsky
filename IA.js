@@ -14,7 +14,9 @@ for(var i = 0; i < 12; i++)
 }
 //var melodia = new Array();
 
-var pentagrama = {
+var pentagrama = this.args;
+
+/*var pentagrama = {
 	tempo: 120,
 	sentimiento: 0, //[1]:Alegre,[2]:Sad,[3]:Al otro ladin,[4]:darks (cago murcielagos)
 	velocidad: 1,	//[1]:Rapido,[2]:Normie,[3]:Lento
@@ -40,7 +42,7 @@ var pentagrama = {
 	    
 	]
 };
-
+*/
 var melodias = new Array();
 var ind = 0;
 var contTemp = 0;

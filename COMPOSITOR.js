@@ -168,7 +168,7 @@ for(var i = 0; i < respuesta.melodia.length; i++)
 
 var MidiWriter = require('midi-writer-js');
 fs = require('fs');
-var notes = new Array();
+var notes = [];
 for(var i = 0; i < pentagrama.melodia.lenght;i++){
 	notes.push(new MidiWriter.NoteEvent({pitch: pentagrama.melodia[i][0] , duration: pentagrama.melodia[i][1]}));
 }
@@ -182,10 +182,11 @@ track1.addEvent([
   }
 );
 var track2 = new MidiWriter.Track();
-notes = new Array();
+notes = [];
 for(var i = 0; i < pentagrama.melodia.lenght;i++){
-	notes.push(new MidiWriter.NoteEvent({pitch: respuesta.melodia[i][0] , duration: respuesta.melodia[i][1]}));
+	notes.push(new MidiWriter.NoteEvent({pitch: respuesta.melodia[i][0] , duration: respuesta.melodia[i][1], channel:2}));
 }
+console.log(notes);
 track2.addEvent([
             notes
     ], function(event, index) {
