@@ -8,7 +8,7 @@ button img{
 .Active{
   background-color: rgb(119, 208, 117);
 }
-
+/*Chat*/
 .chat{
   display: block;
   position: fixed;
@@ -18,7 +18,16 @@ button img{
   bottom: 0px;
   background-color: rgb(134, 162, 137);
 }
+.chat span{
+  text-align: center;
+  font-size: 300%;
+  width: 10vw;
+  display: inline-block;
+  color: white;
+  height: 33%``;
+}
 
+/*---*/
 .teclado{
   display: block;
   position: fixed;
