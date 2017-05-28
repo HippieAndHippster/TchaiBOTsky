@@ -5,7 +5,12 @@ $(function() {
     Compas : "",
     Clave : ""
   };
-
+    //BOT
+    var mood;
+    var speed;
+    var bpm = 120;
+    
+    
     var texto = $("#txt");
     var btn = $("#enviar");
     var OctUp = $("#UP");
@@ -109,25 +114,25 @@ $(function() {
 
   $(document).on('click','.te', function(event) {
       //VEXFLOW
-VF = Vex.Flow;
+    VF = Vex.Flow;
 
-// Create an SVG renderer and attach it to the DIV element named "boo".
-var div = document.getElementById("Upen");
-$("#Upen").empty();
-var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+    // Create an SVG renderer and attach it to the DIV element named "boo".
+    var div = document.getElementById("Upen");
+    $("#Upen").empty();
+    var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
-// Configure the rendering context.
-renderer.resize(1000, 500);
-var context = renderer.getContext();
-context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
+    // Configure the rendering context.
+    renderer.resize(1000, 500);
+    var context = renderer.getContext();
+    context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
 
-// Create a stave of width 400 at position 10, 40 on the canvas.
-var stave = new VF.Stave(0, 0, 200);
+    // Create a stave of width 400 at position 10, 40 on the canvas.
+    var stave = new VF.Stave(0, 0, 200);
 
-// Add a clef and time signature.
-stave.addClef("treble").addTimeSignature("4/4");
-// Connect it to the rendering context and draw!
-stave.setContext(context).draw();
+    // Add a clef and time signature.
+    stave.addClef("treble").addTimeSignature("4/4");
+    // Connect it to the rendering context and draw!
+    stave.setContext(context).draw();
 
     Nota = $(this).text();
     var Notita = Nota+"/"+ (OctPos + 1);
@@ -195,14 +200,14 @@ stave.setContext(context).draw();
         notes.push(new VF.StaveNote({ keys: [Notas[0]], duration: '16r'}));
       }
     }
-      var voice = new VF.Voice({num_beats: 4,  beat_value: 4});
-      voice.addTickables(notes);
+    var voice = new VF.Voice({num_beats: 4,  beat_value: 4});
+    voice.addTickables(notes);
 
-      // Format and justify the notes to 400 pixels.
-      var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 200);
+    // Format and justify the notes to 400 pixels.
+    var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 200);
 
-      // Render voice
-      voice.draw(context, stave);
+    // Render voice
+    voice.draw(context, stave);
 
   });
 
@@ -210,5 +215,32 @@ stave.setContext(context).draw();
     duracion = $(this).attr('id');
     console.log(duracion);
   });
+    
+    function sendBOT(){
+        melody = [];
+        
+        for(var i = 0; i < Notas.length; i++){
+            var note
+        }
+        var parameters = {
+            tempo : bpm,
+            velocidad: speed,
+            sentimiento: mood,
+            melodia : melody
+            
+        }
+        $.ajax({
+          method: "POST",
+          url: "http://localhost:4000/55030a6884a8aee342aff85d70a418c5/v1",
+          data: parameters,
+          dataType:"json",
+          error: function(){
+            console.log("error","Error en el servidor");  //Error de servidor
+          },
+          success: function(data){
+            console.log(data);
+          }
 
+    });
+    }
 });
