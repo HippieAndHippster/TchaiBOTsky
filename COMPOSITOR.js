@@ -1,9 +1,28 @@
 //Se lee sentimiento, tempo, escalasPosibles, escalasEscogidas, melodiaUsuario
 
+const fse = require('fs-extra')
 
-var escalasEscogidas = [1,2,2,4];
+const pentagrama = fse.readJsonSync('./arrayPentagrama.json')
 
-var pentagrama = {
+//console.log(pentagrama);
+
+
+const archivoEscalas = fse.readJsonSync('./arrayAcordes.json')
+
+//console.log(archivoEscalas);
+
+var escalasPosibles = archivoEscalas[0];
+var escalasEscogidas = archivoEscalas[1];
+
+for(var i = 0; i < escalasEscogidas.length; i++)
+{
+	escalasEscogidas[i] = (escalasEscogidas[i]+1)%(escalasPosibles[i].length);
+}
+
+
+/*var escalasEscogidas = [1,2,2,4];*/
+
+/*var pentagrama = {
 	tempo: 120,
 	sentimiento: 0, //[1]:Alegre,[2]:Sad,[3]:Al otro ladin,[4]:darks (cago murcielagos)
 	velocidad: 1,	//[1]:Rapido,[2]:Normie,[3]:Lento
@@ -28,17 +47,17 @@ var pentagrama = {
 	    ["A#",1]
 	    
 	]
-};
+};*/
 /*********************	Acordes	*********************/
 
 var ritmos = [
-				[
+				[//[0]Rapido
 					[1,4,1,2,1,2,1,4]
 				],
-				[
+				[//[1]Medio
 					[4,2,4,2,4]
 				],
-				[
+				[//[2]Lento
 					[4,4,4,4]
 				]
 			];
@@ -144,8 +163,9 @@ for(var i = 0; i < respuesta.melodia.length; i++)
 	pentagrama.melodia[i][1] = 16/pentagrama.melodia[i][1];	
 }
 
-console.log(pentagrama.melodia);
 /*		MIDI INADOR		*/
+
+
 var MidiWriter = require('midi-writer-js');
 fs = require('fs');
 var notes = new Array();
@@ -179,6 +199,8 @@ write.saveMIDI("temp");
 
 
 
+
+/*******************************************	funciones	*******************************************/
 
 
 

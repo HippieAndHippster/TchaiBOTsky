@@ -358,6 +358,36 @@ for(var x = 0; x < melodias.length; x++)
 	}
 }
 
+var escalasEscogidas = new Array();
+for(var i = 0; i < posiblesEscalasTotales.length; i++)
+{
+	escalasEscogidas.push(-1);	
+}
+
+var archivoEscalas = [
+	posiblesEscalasTotales,
+	escalasEscogidas
+];
+
+const fse = require('fs-extra')
+fse.writeJson('./arrayPentagrama.json', pentagrama)
+.then(() => {
+  console.log('success!')
+})
+.catch(err => {
+  console.error(err)
+})
+
+fse.writeJson('./arrayAcordes.json', archivoEscalas)
+.then(() => {
+  console.log('success!')
+})
+.catch(err => {
+  console.error(err)
+})
+
+
+
 /*****************Escalas elejidas*********************/
 //sU PUTA MADRE, NI IDEA
 
