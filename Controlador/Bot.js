@@ -2,6 +2,62 @@
 /*console.log($("this"));
 var feeling = $("this").attr('id');
 console.log(feeling);*/
+$("#ComponerBTN").click(function(){
+  sendBOT();
+  console.log("enviado");
+});
+
+function sendBOT(){
+    melody = [];
+    for(var i = 0; i < Notas.length; i++){
+        var note = Notas[i].split('/');
+        note = note[0];
+        var duration;
+        switch(Ttranscurrido[i]){
+              case '16':
+                duration = 1;
+              break;
+              case '8':
+                duration = 2;
+              break;
+              case 'q':
+                duration = 4;
+              break;
+              case 'h':
+                duration = 8;
+              break;
+              case 'w':
+                duration = 16;
+              break;
+      }
+        melody.push([note,duration]);
+    }
+    var parameters = {
+        tempo : bpm,
+        velocidad: speed,
+        sentimiento: mood,
+        melodia : melody
+    }
+    console.log(parameters);
+    $.ajax({
+      method: "POST",
+      url: "https://us-west-1-bot.recime.io/55030a6884a8aee342aff85d70a418c5/v1",
+      //url: "http://localhost:4000/55030a6884a8aee342aff85d70a418c5/v1",
+      data: parameters,
+      dataType:"json",
+      error: function(){
+        console.log("error","Error en el servidor");  //Error de servidor
+      },
+      success: function(data){
+        //Reproduccion del archivo
+        console.log(data);
+        $('.contenedor').append("<a class='btn btn-danger' href='"+ data.url +""'>Escucha Mi recomendacion</a>");
+
+      }
+
+});
+}
+
 function toast(tipo,texto){
   var $contenido = $('.contenedor');
   switch (tipo) {
@@ -29,25 +85,36 @@ function toast(tipo,texto){
   },7000);
 }
 
+function initA(){
+  toast('info','Hola antes de empezar dime que tipo de melodia estas esperando');
+}
 //toast('info','e we');
 
 function answer(feeling){
   console.log(feeling);
   switch (feeling) {
     case 'HappyEmogi':
+        mood = 0;
+        speed = 0;
         toast('warning','Oh vaya que tambien lo siento');
         toast('danger','Hagamozlo');
         toast('success','\(^o^)/');
         break;
     case 'SadEmogi':
+        speed = 2;
+        mood = 1;
         toast('warning','Baia Baia');
         toast('info','Entonces una melodia triste');
         break;
     case 'MehEmogi':
+        speed = 1;
+        mood = 3;
         toast('success','Tienes razon');
         toast('info','dame un momento');
         break;
     case 'Aladin':
+        mood = 2;
+        speed = 1;
         toast('info','Dont worry its not a trap');
         toast('success','Vamos a Batiproducirlo Robin');
         break;
@@ -60,9 +127,12 @@ function answer(feeling){
         toast('default',"Veo que no te gusto (T-T)");
         toast('info',"Lo intentaremos otra vez o('^')o");
         toast('success','(^-^)');
+        sendBOT();
         break;
     }
 }
+
+
 
 
 /*funtion Bot(){
