@@ -12,7 +12,7 @@
   <body>
     <div id="Upen"></div>
 
-
+    <div class="contenedor"></div>
     <!--Teclado-->
 
     <div class="teclado">
@@ -33,6 +33,7 @@
 
 
       <div class="btn-group opTe" role="group" aria-label="...">
+        <button type="button" class="btn btn-success" id="ComponerBTN">Acompa&ntilde;ame a componer</button>
         <button type="button"  class="btn btn-warning" id="DelN"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         <button type="button"  class="btn btn-danger" id="DelAll"><i class="fa fa-trash" aria-hidden="true"></i></button>
       </div>
@@ -64,24 +65,24 @@
 
     </div>
     <div class="chat">
-      <button type="button" class="btn btn-warning btn-lg">
-        <span class="emogi" id="HappyEmogi"><i class="fa fa-smile-o" aria-hidden="true"></i></span>
+      <button type="button" class="btn btn-warning btn-lg emogi" id="HappyEmogi" onclick="answer('HappyEmogi');">
+        <span><i class="fa fa-smile-o" aria-hidden="true"></i></span>
       </button>
-      <button type="button" class="btn btn-primary btn-lg">
-        <span class="emogi" id="SadEmogi"><i class="fa fa-frown-o" aria-hidden="true"></i></span>
+      <button type="button" class="btn btn-primary btn-lg emogi" id="SadEmogi" onclick="answer('SadEmogi');">
+        <span><i class="fa fa-frown-o" aria-hidden="true"></i></span>
       </button>
-      <button type="button" class="btn btn-success btn-lg">
-        <span class="emogi" id="MehEmogi"><i class="fa fa-meh-o" aria-hidden="true"></i></span>
+      <button type="button" class="btn btn-success btn-lg emogi" id="MehEmogi" onclick="answer('MehEmogi');">
+        <span><i class="fa fa-meh-o" aria-hidden="true"></i></span>
       </button>
-      <button type="button" class="btn btn-default btn-lg">
-        <span class="emogi" id="Aladin"><i class="fa fa-hand-spock-o" aria-hidden="true"></i></span>
+      <button type="button" class="btn btn-default btn-lg emogi" id="Aladin" onclick="answer('Aladin');">
+        <span><i class="fa fa-hand-spock-o" aria-hidden="true"></i></span>
       </button>
-      <button type="button" class="btn btn-info btn-lg">
-        <span class="emogi" id="Like"><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+      <button type="button" class="btn btn-info btn-lg emogi" id="Like" onclick="answer('Like');">
+        <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
       </button>
 
-      <button type="button" class="btn btn-danger btn-lg">
-        <span class="emogi" id="Dislike"><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
+      <button type="button" class="btn btn-danger btn-lg emogi" id="Dislike" onclick="answer('Dislike');">
+        <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
       </button>
     </div>
 
@@ -89,9 +90,10 @@
     <script src="Librerias/jquery-3.1.1.min.js" charset="utf-8"></script>
     <script src="Librerias/jquery-ui.min.js" charset="utf-8"></script>
     <script src="Librerias/bootstrap-3.3.7-dist/js/bootstrap.js" charset="utf-8"></script>
+    <script src="midi-library.js" charset="utf-8"></script>
     <script src="Librerias/vexflow-min.js" charset="utf-8"></script>
-    <script src="Controlador/Bot.js" charset="utf-8"></script>
     <script src="Controlador/index.js" charset="utf-8"></script>
     <script src="Controlador/VexflowInator.js" charset="utf-8"></script>
+    <script src="Controlador/Bot.js" charset="utf-8"></script>
   </body>
 </html>

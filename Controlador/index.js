@@ -9,8 +9,8 @@ $(function() {
     var mood;
     var speed;
     var bpm = 120;
-    
-    
+
+
     var texto = $("#txt");
     var btn = $("#enviar");
     var OctUp = $("#UP");
@@ -25,35 +25,6 @@ $(function() {
     var tiempo = 100;
     var OctPos = 3;
 
-
-    function toast(tipo,texto){
-      var $contenido = $('body');
-      switch (tipo) {
-        case 'error':
-          $contenido.append("<div class='container'><div id='tostada' class='alert alert-danger tostada'>"+ texto +"</div></div>");
-          break;
-        case 'warning':
-          $contenido.append("<div class='container'><div id='tostada' class='alert alert-warning tostada'>"+ texto +"</div></div>");
-          break;
-        case 'success':
-          $contenido.append("<div class='container'><div id='tostada' class='alert alert-success tostada'>"+ texto +"</div></div>");
-          break;
-        case 'info':
-          $contenido.append("<div class='containe ' ><div id='tostada'class='alert alert-info tostada'>"+ texto +"</div></div>");
-          break;
-        default:
-          console.log('No se reconocio tipo de toast');
-      }
-      $(".tostada").click(function(){
-          $(this).fadeOut(1000);
-      });
-      $(".tostada").animate({'right':'0'}, 1000)
-      setTimeout(function(){
-        $(".tostada").fadeOut(1000);
-      },7000);
-    }
-
-    toast('info','e we');
 
     $DN.click(function(){
       Notas.pop();
@@ -215,10 +186,10 @@ $(function() {
     duracion = $(this).attr('id');
     console.log(duracion);
   });
-    
+
     function sendBOT(){
         melody = [];
-        
+
         for(var i = 0; i < Notas.length; i++){
             var note = Notas[i].split('/');
             note = note[0];

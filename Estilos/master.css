@@ -26,19 +26,29 @@ button img{
   color: #455a64;
   height: 33%``;
 }
+
+.contenedor{
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    top: 0;
+    width: 350px;
+    z-index: 5;
+}
 .tostada{
-  position:fixed;
+  width: 30%;
+  position:relative;
   z-index:99999999999;
   top: 15%;
   font-size: large;
   font-weight: bold;
   padding: 2% 6% 2% 6%;
   bottom: 100vh;
-  right:-60vw;
+  right:-300px;
   cursor: pointer;
 }
 .tostada:hover{
-  background-color: $primTras;
+  background-color: rgb(138, 129, 148);
 }
 /*---*/
 .teclado{
