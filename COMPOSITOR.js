@@ -195,8 +195,22 @@ track2.addEvent([
 );
 var tracks = [track1,track2];
 var write = new MidiWriter.Writer(tracks);
-write.saveMIDI("temp");
+write.saveMIDI("cancionsita");
 
+
+var nuevoArchivoEscalas = [
+	escalasPosibles,
+	escalasEscogidas
+];
+
+
+fse.writeJson('./arrayAcordes.json', nuevoArchivoEscalas)
+.then(() => {
+  console.log('success!')
+})
+.catch(err => {
+  console.error(err)
+})
 
 
 
