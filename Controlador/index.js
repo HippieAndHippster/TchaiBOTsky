@@ -76,15 +76,14 @@ $(function() {
 
   });
 
-function VexFormatter(){
 
-}
   $(document).on('click','.te', function(event) {
       //VEXFLOW
 VF = Vex.Flow;
 
 // Create an SVG renderer and attach it to the DIV element named "boo".
-var div = document.getElementById("Upen")
+var div = document.getElementById("Upen");
+$("#Upen").empty();
 var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
 // Configure the rendering context.
@@ -99,14 +98,14 @@ var stave = new VF.Stave(0, 0, 200);
 stave.addClef("treble").addTimeSignature("4/4");
 // Connect it to the rendering context and draw!
 stave.setContext(context).draw();
-      
+
     Nota = $(this).text();
     var Notita = Nota+"/"+ (OctPos + 1);
     Notas.push(Notita);
     //var Tactual = $(this).data('Completar');
     Ttranscurrido.push(duracion);
     //console.log(duracion);
-      
+
     var inside = 1;
     var i;
     var tiempo = 0;
@@ -178,12 +177,8 @@ stave.setContext(context).draw();
   });
 
   $(document).on('click','.opTiem', function(event) {
-    tiempo = $(this).attr('id');
-    console.log(tiempo);
+    duracion = $(this).attr('id');
+    console.log(duracion);
   });
 
 });
-
-
-
-
