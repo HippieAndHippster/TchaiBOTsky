@@ -358,11 +358,75 @@ for(var x = 0; x < melodias.length; x++)
 	}
 }
 
+/*****************Escalas elejidas*********************/
+//sU PUTA MADRE, NI IDEA
 
-/*********************	Acordes	*********************/
+
+/*var escalasEscojidas = [1,2,2,4];
 
 
+var ritmos = [
+				[
+					[1,4,1,2,1,2,1,4]
+				],
+				[
+					[4,2,4,2,4]
+				],
+				[
+					[4,4,4,4]
+				]
+			];
+var acordes = new Array();
+for(var i = 0;i < escalasEscojidas.length;i++)
+{
+	acordes.push(new Array());
+	acordes[i].push( [ escalasEscojidas[i]		,(escalasEscojidas[i]+4)%12	,(escalasEscojidas[i]+7 )%12]	);//PRIMERA
+	acordes[i].push( [(escalasEscojidas[i]+2)%12,(escalasEscojidas[i]+7)%12	,(escalasEscojidas[i]+11)%12]	);//QUINTA
+	acordes[i].push( [ escalasEscojidas[i]		,(escalasEscojidas[i]+4)%12	,(escalasEscojidas[i]+9 )%12]	);//SEXTA
+	acordes[i].push( [ escalasEscojidas[i]		,(escalasEscojidas[i]+5)%12	,(escalasEscojidas[i]+9 )%12]	);//CUARTA
+}
 
+var ritmo = new Array();
+
+var respuesta = {
+	tempo: pentagrama.tempo,
+	sentimiento: pentagrama.sentimiento,
+	melodia: new Array()
+};
+
+ritmo = ritmos[pentagrama.velocidad][	Math.floor((Math.random() * (ritmos[pentagrama.velocidad].length-1)) + 0)	];
+if(pentagrama.velocidad==0)
+{
+	for(var i = 0; i < ritmo.length; i++)
+	{
+		respuesta.melodia.push([acordes[pentagrama.sentimiento][i%4],ritmo[i]]);
+	}	
+}
+else
+{
+	var ii = 0;
+	var limit = ritmo.length/4;
+	var iChords = 0;
+	for(var i = 0; i < ritmo.length; i++)
+	{
+		respuesta.melodia.push([acordes[pentagrama.sentimiento][iChords],ritmo[i]]);
+		ii++;
+		if(ii>limit)
+		{
+			ii=0;
+			iChords++;
+		}
+	}	
+}
+
+
+//A C O P L A M I E N T O     A      L I B R E R I A      M I D I
+
+melodiaMidi = new Array();
+for(var i = 0; i < respuesta.melodia; i++){
+	respuesta.melodia[i][]
+}
+*/
 
 
 
