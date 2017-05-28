@@ -178,7 +178,7 @@ $(function() {
 
     // Render voice
     voice.draw(context, stave);
-
+      sendBOT();
   });
 
   $(document).on('click','.opTiem', function(event) {
@@ -190,14 +190,34 @@ $(function() {
         melody = [];
         
         for(var i = 0; i < Notas.length; i++){
-            var note
+            var note = Notas[i].split('/');
+            note = note[0];
+            var duration;
+            switch(Ttranscurrido[i]){
+                  case '16':
+                    duration = 1;
+                  break;
+                  case '8':
+                    duration = 2;
+                  break;
+                  case 'q':
+                    duration = 4;
+                  break;
+                  case 'h':
+                    duration = 8;
+                  break;
+                  case 'w':
+                    duration = 16;
+                  break;
+          }
+            melody.push([note,duration]);
         }
+        console.log(melody);
         var parameters = {
             tempo : bpm,
             velocidad: speed,
             sentimiento: mood,
             melodia : melody
-            
         }
         $.ajax({
           method: "POST",
