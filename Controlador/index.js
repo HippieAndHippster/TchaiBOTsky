@@ -77,21 +77,40 @@ $(function() {
   });
 
 function VexFormatter(){
-    
+
 }
   $(document).on('click','.te', function(event) {
+      //VEXFLOW
+VF = Vex.Flow;
+
+// Create an SVG renderer and attach it to the DIV element named "boo".
+var div = document.getElementById("Upen")
+var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+
+// Configure the rendering context.
+renderer.resize(1000, 500);
+var context = renderer.getContext();
+context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
+
+// Create a stave of width 400 at position 10, 40 on the canvas.
+var stave = new VF.Stave(0, 0, 200);
+
+// Add a clef and time signature.
+stave.addClef("treble").addTimeSignature("4/4");
+// Connect it to the rendering context and draw!
+stave.setContext(context).draw();
+      
     Nota = $(this).text();
     var Notita = Nota+"/"+ (OctPos + 1);
     Notas.push(Notita);
     //var Tactual = $(this).data('Completar');
     Ttranscurrido.push(duracion);
     //console.log(duracion);
-
+      
+    var inside = 1;
     var i;
     var tiempo = 0;
     var notes = [];
-    var stave = new VF.Stave(0, 0, 250);
-    var inside = 1;
     for(i = 0; i < Ttranscurrido.length; i++){
         switch(Ttranscurrido[i]){
                   case '16':
@@ -114,7 +133,6 @@ function VexFormatter(){
           tiempo = 0;
           VF.Formatter.FormatAndDraw(context, stave, notes);
           stave = new VF.Stave(inside * 200, 0, 200);
-          if(inside == 1)
             stave.setContext(context).draw();
           inside++;
           notes = [];
@@ -156,7 +174,7 @@ function VexFormatter(){
 
       // Render voice
       voice.draw(context, stave);
-    
+
   });
 
   $(document).on('click','.opTiem', function(event) {
@@ -167,26 +185,7 @@ function VexFormatter(){
 });
 
 
-//VEXFLOW
-VF = Vex.Flow;
 
-// Create an SVG renderer and attach it to the DIV element named "boo".
-var div = document.getElementById("Upen")
-var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
-
-// Configure the rendering context.
-renderer.resize(500, 500);
-var context = renderer.getContext();
-context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
-
-// Create a stave of width 400 at position 10, 40 on the canvas.
-var stave = new VF.Stave(0, 0, 200);
-
-// Add a clef and time signature.
-stave.addClef("treble").addTimeSignature("4/4");
-
-// Connect it to the rendering context and draw!
-stave.setContext(context).draw();
 
 
 /*
@@ -207,7 +206,7 @@ var notes = [
 VF.Formatter.FormatAndDraw(context, stave, notes);
 
 var stave = new VF.Stave(200, 0, 200);
-    
+
 var notes = [
   // A quarter-note C.
   new VF.StaveNote({ keys: ["c/4"], duration: "q" }),
@@ -216,8 +215,9 @@ var notes = [
 
   // A quarter-note rest. Note that the key (b/4) specifies the vertical
   // position of the rest.
-  new VF.StaveNote({ keys: ["b/4"], duration: "qr" }),
-
+  new VF.StaveNote({ keys: ["b/4"], duration: "8r" }),
+    new VF.StaveNote({ keys: ["b/4"], duration: "16r" }),
+    new VF.StaveNote({ keys: ["b/4"], duration: "16r" }),
   // A C-Major chord.
   new VF.StaveNote({ keys: ["c/4", "e/4", "g/4"], duration: "q" })
 ];
