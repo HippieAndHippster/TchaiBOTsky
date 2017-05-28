@@ -1,10 +1,4 @@
-$(function() {
-    //Prototipo Pentagrama
-  var Pregunta = {
-    Notes: [],
-    Compas : "",
-    Clave : ""
-  };
+
     //BOT
     var mood;
     var speed;
@@ -12,7 +6,6 @@ $(function() {
 
 
     var texto = $("#txt");
-    var btn = $("#enviar");
     var OctUp = $("#UP");
     var OctDown = $("#DOWN");
     var $Oct = $("#Cs");
@@ -24,7 +17,6 @@ $(function() {
     var Ttranscurrido = [];
     var tiempo = 100;
     var OctPos = 3;
-
 
     $DN.click(function(){
       Notas.pop();
@@ -64,23 +56,7 @@ $(function() {
 
 
 
-    btn.click(function(){
-      var parameters = texto.val();
-      $.ajax({
-          method: "GET",
-          url: "http://localhost:4000/55030a6884a8aee342aff85d70a418c5/v1",
-          data: parameters,
-          dataType:"json",
-          error: function(){
-            console.log("error","Error en el servidor");  //Error de servidor
-          },
-          success: function(data){
-            console.log(data);
-          }
 
-    });
-
-  });
 
 
   $(document).on('click','.te', function(event) {
@@ -179,59 +155,9 @@ $(function() {
 
     // Render voice
     voice.draw(context, stave);
-      sendBOT();
   });
 
   $(document).on('click','.opTiem', function(event) {
     duracion = $(this).attr('id');
     console.log(duracion);
   });
-
-    function sendBOT(){
-        melody = [];
-
-        for(var i = 0; i < Notas.length; i++){
-            var note = Notas[i].split('/');
-            note = note[0];
-            var duration;
-            switch(Ttranscurrido[i]){
-                  case '16':
-                    duration = 1;
-                  break;
-                  case '8':
-                    duration = 2;
-                  break;
-                  case 'q':
-                    duration = 4;
-                  break;
-                  case 'h':
-                    duration = 8;
-                  break;
-                  case 'w':
-                    duration = 16;
-                  break;
-          }
-            melody.push([note,duration]);
-        }
-        console.log(melody);
-        var parameters = {
-            tempo : bpm,
-            velocidad: speed,
-            sentimiento: mood,
-            melodia : melody
-        }
-        $.ajax({
-          method: "POST",
-          url: "http://localhost:4000/55030a6884a8aee342aff85d70a418c5/v1",
-          data: parameters,
-          dataType:"json",
-          error: function(){
-            console.log("error","Error en el servidor");  //Error de servidor
-          },
-          success: function(data){
-            console.log(data);
-          }
-
-    });
-    }
-});
