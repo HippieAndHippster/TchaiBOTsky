@@ -51,7 +51,7 @@ function sendBOT(){
       success: function(data){
         //Reproduccion del archivo
         console.log(data);
-        $('.contenedor').append("<a class='btn btn-danger' href='"+ data.url +""'>Escucha Mi recomendacion</a>");
+        $('.contenedor').append("<a class='btn btn-danger' onClick='MIDIjs.play('"+ data.url +"');' href='#'>Escucha Mi recomendacion</a>");
 
       }
 
